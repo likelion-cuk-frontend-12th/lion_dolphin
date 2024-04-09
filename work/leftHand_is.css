@@ -1,0 +1,48 @@
+html{
+    background-color: tomato;
+    height: 100%;
+}
+
+body{
+    background-color: wheat;
+    width: 300px;
+    height: 300px;
+    margin-left: 300px;
+    margin-top: 300px;
+    display: flex;
+    justify-content: center;
+    border: 3px solid black;
+
+}
+.square{
+    background-color: rgb(26, 112, 95);
+    justify-content: center;
+    align-items: center;
+    border: 3px solid white;
+    position: relative;
+    margin-top: 20px;
+    width: 65px;
+    height: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.midsquare{
+    background-color: rgb(26, 112, 95);
+    border: 3px dashed white;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 170px;
+    height: 10%;
+    
+}
+
+
+
+
+/* #square-mid{
+    border: 3px dashed white;
+} */
