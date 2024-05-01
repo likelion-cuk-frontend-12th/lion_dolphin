@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <script src="./Calculator.js"></script>
+    <link href="./Calculator.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>계산기</title>
+  </head>
+  <body>
+    <div class="calc_box">
+      <h1 class="titles">Calculator</h1>
+      <span>First number:</span>
+      <input type="text" name="First_number" class="input_box" id="input1" />
+      <br />
+      <span>Second number:</span>
+      <input type="text" name="Second_number" class="input_box" id="input2" />
+      <br />
+      <span>Operator:</span>
+      <select id="opt">
+        <option value="*">*</option>
+        <option value="%">%</option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+      </select>
+      <input
+        type="button"
+        value="Calculate"
+        id="submit_button"
+        onClick="calculation()"
+      />
+      <h1 class="result">Result: <span id="res"></span></h1>
+    </div>
+  </body>
+</html>
