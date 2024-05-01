@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./Calculator.css">
+</head>
+<body>
+
+    <h1>Calculator</h1>
+    <h4>First number :</h4>
+    <input type="number" id="FirstNumber">
+    <h4>Second number :</h4>
+    <input type="number" id="SecondNumber">
+    <h4>Operator :</h4>
+    <input list="Operator" id="OperatorInput">
+
+<datalist id="Operator">
+  <option value="+">Sum</option>
+  <option value="-">Subtract</option>
+  <option value="*">Multiplication</option>
+  <option value="/">Divide</option>
+  <option value="%">Remain</option>
+</datalist>
+<br>
+<br>
+
+<button onclick="calculate()">Calculate</button>
+
+    <script src="./Calculator.js"></script>
+</body>
+</html>
