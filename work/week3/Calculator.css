@@ -1,0 +1,11 @@
+body{
+    
+}
+
+.calculate{
+    background-color: green;
+    border: green;
+    color: white;
+    width: 120px;
+    height: 40px;
+}
