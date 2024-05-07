@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel = "stylesheet" href = "Calculator.css">
+    <script src = "Calculator.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3주차과제</title>
+
+</head>
+<body>
+    
+    <h1>Calculator</h1>
+
+    <div class="num1"> First number: </div>
+     <input type = "text" id="num1" /> </p>
+
+     <div class="num2"> Second number: </div>
+     <input type = "text" id="num2" /> </p>
+   
+
+     <label for="operator">Operator:</label>
+     <br>
+     <select id="operator">
+       <option value="+">+</option>
+       <option value="-">-</option>
+       <option value="*">*</option>
+       <option value="/">/</option>
+     </select>
+     <br><br>
+
+  
+        <button    class="calculate"  onclick="calculate()"> Calculate</button>
+
+
+    <div id="result"></div>    
+   
+
+
+
+</body>
+</html>
