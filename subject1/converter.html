@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      const [inverted, setInverted] = React.useState(false);
+      const [hours, setHours] = React.useState(0);
+      const [minutes, setMinutes] = React.useState(0);
+
+      const reset = () => {
+        setHours(0);
+        setMinutes(0);
+      };
+      const invert = () => {
+        setInverted(!inverted);
+      };
+
+      const handleMinutesChange = (num) => {
+        const minutes = parseFloat(num.target.value);
+        let hours = 0;
+        if (minutes > 0) {
+          hours = Math.round(minutes / 60);
+        }
+        setHours(Math.round(hours));
+        setMinutes(minutes);
+        //console.log(minutes + " " + hours);
+      };
+      const handleHoursChange = (num) => {
+        const hours = parseFloat(num.target.value);
+        const minutes = hours * 60;
+        setHours(hours);
+        setMinutes(Math.round(minutes));
+        //console.log(minutes + " " + hours);
+      };
+
+      return (
+        <div>
+          <h3>분/시 변환기</h3>
+          <div>
+            <label>분: </label>
+            <input
+              placeholder="Minutes"
+              type="number"
+              step="0.01"
+              onChange={handleMinutesChange}
+              value={minutes}
+              disabled={inverted}
+            />
+          </div>
+          <div>
+            <label>시: </label>
+            <input
+              placeholder="Hours"
+              type="number"
+              step="0.01"
+              onChange={handleHoursChange}
+              value={hours}
+              disabled={!inverted}
+            />
+          </div>
+          <br />
+          <div>
+            <button onClick={reset}>리셋</button>
+            <button onClick={invert}>{inverted ? "분=>시" : "시=>분"}</button>
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
