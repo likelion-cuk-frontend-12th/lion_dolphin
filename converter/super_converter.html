@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        #reset{
+            background-color: rgb(255, 60, 0);
+            border: none;
+            border-radius: 10%;
+            height: 30px;
+            color: white;
+        }
+        #invert{
+            background-color: rgb(0, 140, 255);
+            border: none;
+            border-radius: 10%;
+            height: 30px;
+            color: white;
+        }
+    </style>
+	<body>
+		<div id="root"></div>
+	</body>
+	<script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+	<script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script type="text/babel">
+		function KiloToMile() {
+			const [inverted, setInverted] = React.useState(false);
+            const [Kilo, setKilo] = React.useState(0);
+            const [Mile, setMile] = React.useState(0);
+
+            const invert = () => {
+                setInverted(!inverted);
+            } 
+
+            const reset = () => {
+                setKilo(0);
+                setMile(0);
+            }
+
+            const handleKiloChange = (event) => {
+                const Kilo = parseFloat(event.target.value);
+                let Mile = 0;
+                if(Kilo > 0){
+                    Mile = Math.round(Kilo / 0.621371);
+                }
+                setKilo(Kilo);
+                setMile(Mile);
+            }
+
+            const handleMileChange = () => {
+                const Mile = parseFloat(event.target.value);
+                let Kilo = Math.round(Mile * 0.621371);
+                setKilo(Kilo);
+                setMile(Mile);
+            }
+			return (
+				<div>
+					<h3>킬로미터/마일 변환기</h3>
+					<div>
+						<label>킬로미터: </label>
+						<input placeholder="Minutes" type="number" value={Kilo} onChange={handleKiloChange} disabled={inverted} />
+					</div>
+					<div>
+						<label>마일: </label>
+						<input placeholder="Hours" type="number" value={Mile} onChange={handleMileChange} disabled={!inverted} />
+					</div>
+					<br />
+					<div>
+						<button onClick={reset} id='reset'>리셋</button>
+						<button onClick={invert} id='invert'>{inverted ? "마일=>킬로미터" : "킬로미터=>마일"}</button>
+					</div>
+				</div>
+			);
+		}
+
+        function MinToHour() {
+            const [Minutes,setMinutes] = React.useState(0);
+            const [Hours, setHours] = React.useState(0);
+			const [inverted, setInverted] = React.useState(false);
+
+            const invert = () => {
+				setInverted(!inverted);
+            }
+
+            const reset = () => {
+                setMinutes(0);
+                setHours(0);
+            }
+
+			const handleMinutesChange = (event) => {
+				const Minutes = parseFloat(event.target.value);
+				let Hours = 0;
+				if(Minutes > 0){
+					Hours = Math.round(Minutes / 60);
+				}
+				setMinutes(Minutes);
+				setHours(Hours);
+			}
+
+			const handleHoursChange = (event) => {
+				const Hours = parseFloat(event.target.value);
+				const Minutes = Hours*60;
+				setHours(Hours);
+				setMinutes(Math.round(Minutes));
+			}
+
+			return (
+				<div>
+					<h3>분/시 변환기</h3>
+					<div>
+						<label>분: </label>
+						<input placeholder="Minutes" type="number" value={Minutes} onChange={handleMinutesChange} disabled={inverted} />
+					</div>
+					<div>
+						<label>시: </label>
+						<input placeholder="Hours" type="number" value={Hours} onChange={handleHoursChange} disabled={!inverted} />
+					</div>
+					<br />
+					<div>
+						<button onClick={reset} id="reset">리셋</button>
+						<button onClick={invert} id="invert">{inverted ? "분=>시" : "시=>분"}</button>
+					</div>
+				</div>
+			);
+		}
+
+        function App() {
+            const [Changed, setChanged] = React.useState("MinToHour");
+
+            const handleInvertChange = (event) => {
+                setChanged(event.target.value);
+            }
+
+            return (
+                <div>
+                    <h1>변환기</h1>
+                    <select value={Changed} onChange={handleInvertChange}>
+                        <option value="MinToHour">분/시 변환기</option>
+                        <option value="KiloToMile">킬로미터/마일 변환기</option>
+                    </select>
+                    <hr />
+                    {Changed === "MinToHour" ? <MinToHour /> : <KiloToMile />}
+                </div>
+            )
+        }
+
+		ReactDOM.render(<App />, root);
+	</script>
+</html>
