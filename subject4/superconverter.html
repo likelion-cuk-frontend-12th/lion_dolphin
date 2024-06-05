@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function Button({ text, backgroundColor, onClick }) {
+      return (
+        <button
+          style={{
+            backgroundColor: backgroundColor,
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            height: "40px",
+            marginRight: "20px",
+          }}
+          onClick={onClick}
+        >
+          {text}
+        </button>
+      );
+    }
+    function Time() {
+      const [toHour, setToHour] = React.useState(true);
+      const [hour, setHour] = React.useState(0);
+      const [minute, setMinute] = React.useState(0);
+
+      const onHour = (e) => {
+        const input = parseInt(e.target.value, 10);
+        setMinute(input);
+        setHour(Math.round(input / 60));
+      };
+
+      const onMinute = (e) => {
+        const input = e.target.value;
+        setHour(input);
+        setMinute(input * 60);
+      };
+
+      const reset = () => {
+        setToHour(true);
+        setMinute(0);
+        setHour(0);
+      };
+
+      const convert = () => {
+        setToHour(!toHour);
+      };
+      return (
+        <div>
+          <h3>분/시 변환기</h3>
+          <div>
+            <label>분: </label>
+            <input
+              placeholder="Minutes"
+              type="number"
+              onChange={onHour}
+              value={minute}
+              disabled={toHour ? false : true}
+            />
+          </div>
+          <div>
+            <label>시: </label>
+            <input
+              placeholder="Hours"
+              type="number"
+              onChange={onMinute}
+              value={hour}
+              disabled={toHour ? true : false}
+            />
+          </div>
+          <br />
+          <div>
+            <Button text="리셋" backgroundColor="pink" onClick={reset} />
+            <Button
+              text={toHour ? "시=>분" : "분=>시"}
+              backgroundColor="navy"
+              onClick={convert}
+            />
+          </div>
+        </div>
+      );
+    }
+    function Distance() {
+      const [toMile, setToMile] = React.useState(true);
+      const [mile, setMile] = React.useState(0);
+      const [kilomemter, setKilometer] = React.useState(0);
+
+      const onMile = (e) => {
+        const input = parseFloat(e.target.value);
+        setKilometer(input);
+        setMile(input * 0.621371);
+      };
+
+      const onKilometer = (e) => {
+        const input = e.target.value;
+        setMile(input);
+        setKilometer(input / 0.621371);
+      };
+
+      const reset = () => {
+        setToMile(true);
+        setMile(0);
+        setKilometer(0);
+      };
+
+      const convert = () => {
+        setToMile(!toMile);
+      };
+
+      return (
+        <div>
+          <h3>킬로미터/마일 변환기</h3>
+          <div>
+            <label>킬로미터: </label>
+            <input
+              placeholder="킬로미터"
+              type="number"
+              onChange={onKilometer}
+              value={mile}
+              disabled={toMile ? false : true}
+            />
+          </div>
+          <div>
+            <label>마일: </label>
+            <input
+              placeholder="마일"
+              type="number"
+              onChange={onMile}
+              value={kilomemter}
+              disabled={toMile ? true : false}
+            />
+          </div>
+          <br />
+          <div>
+            <Button text="리셋" backgroundColor="red" onClick={reset} />
+            <Button
+              text={toMile ? "마일=>킬로미터" : "킬로미터=>마일"}
+              backgroundColor="skyblue"
+              onClick={convert}
+            />
+          </div>
+        </div>
+      );
+    }
+    function App() {
+      const [nowType, setNowType] = React.useState("time");
+      const onChange = (e) => {
+        setNowType(e.target.value);
+      };
+      return (
+        <div>
+          <h1>변환기</h1>
+          <select name="type" value={nowType} onChange={onChange}>
+            <option value="time">분/시 변환기</option>
+            <option value="distance">킬로미터/마일 변환기</option>
+          </select>
+          <hr />
+          {nowType === "time" ? <Time /> : <Distance />}
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

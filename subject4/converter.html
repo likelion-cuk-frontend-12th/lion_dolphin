@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      const [toHour, setToHour] = React.useState(true);
+      const [hour, setHour] = React.useState(0);
+      const [minute, setMinute] = React.useState(0);
+
+      const onHour = (e) => {
+        const input = parseInt(e.target.value, 10);
+        setMinute(input);
+        setHour(Math.round(input / 60));
+      };
+
+      const onMinute = (e) => {
+        const input = e.target.value;
+        setHour(input);
+        setMinute(input * 60);
+      };
+
+      const reset = () => {
+        setToHour(true);
+        setMinute(0);
+        setHour(0);
+      };
+
+      const convert = () => {
+        setToHour(!toHour);
+      };
+
+      return (
+        <div>
+          <h3>분/시 변환기</h3>
+          <div>
+            <label>분: </label>
+            <input
+              placeholder="Minutes"
+              type="number"
+              onChange={onHour}
+              value={minute}
+              disabled={toHour ? false : true}
+            />
+          </div>
+          <div>
+            <label>시: </label>
+            <input
+              placeholder="Hours"
+              type="number"
+              onChange={onMinute}
+              value={hour}
+              disabled={toHour ? true : false}
+            />
+          </div>
+          <br />
+          <div>
+            <button onClick={reset}>리셋</button>
+            <button onClick={convert}>{toHour ? "시=>분" : "분=>시"}</button>
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
